@@ -14,5 +14,8 @@ Implementacion de varios algoritmos en C y C++.
 - Algoritmo de busqueda DFS Y BFS
 - Algoritmo de encontrar la ruta mas corta pontederada (Dijkstra)
 
+## Metodos numericos
+- Encontrar el determinante de una matriz nxn
+
 ## Criptografia
 - Maximo comun divisor (MCD)

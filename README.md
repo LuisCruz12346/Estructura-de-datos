@@ -18,4 +18,7 @@ Implementacion de varios algoritmos en C y C++.
 - Encontrar el determinante de una matriz nxn
 
 ## Criptografia
-- Maximo comun divisor (MCD)
+- Maximo comun divisor (MCD) de varios a la vez
+
+## Busqueda 
+- Busqueda binaria

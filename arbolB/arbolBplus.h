@@ -1,6 +1,7 @@
 #ifndef ARBOLESB
 #define ARBOLESB
 
+#define IMPRESION ((void *)0x01)
 typedef struct nodo{
 	struct nodo **Pi; // Un arreglo de los punteros siempre va a ser de tamaño fijo, de tamaño M + 1, para dejar una para la division
 	int *Ki; // Un arreglo de M - 1 valores. Pero se deja uno mas para detectar el split 
@@ -17,6 +18,11 @@ typedef struct arbolB_plus{
 	Nodo *raiz;
 	int orden;
 }ArbolB_plus;
+
+Nodo *bufer_bajo; // Se guarda la direccion del buffer bajo
+
+Nodo *bufer_alto; // Se guarda la direccion del buffer alto 
+
 
 // Creacion de un arboB_plus
 ArbolB_plus* creacionArbol(int orden);
@@ -47,5 +53,37 @@ void imprimirArbol(ArbolB_plus* arbolB_plus);
 
 // Insertar valor en el nodo
 int insertarValorNodo(Nodo *nodo, int valor);
+
+// Nodos de la pila
+typedef struct nodo_pila{
+	Nodo *contenido;
+	struct nodo_pila *anterior;
+	struct nodo_pila *siguiente;
+} Nodo_pila;
+
+// Pila
+typedef struct _pila{
+	Nodo_pila *inicio;
+	Nodo_pila *final;
+}Pila;
+
+//	## Funciones
+// Crear un nodo
+Nodo_pila* crear_nodo(Nodo *nodoDePila);
+
+// Crear una pila
+Pila* crear_pila();
+
+// Insertar un nodo a la pila
+void insertar_en_pila(Pila* pila, Nodo *nodoDePila);
+
+// Eliminar un miembro a la pila
+void eliminar_en_pila(Pila* pila);
+
+// Inserta un nodo en forma de cola
+void insertar_en_cola(Pila* pila, Nodo *nodoDePila);
+
+// Eliminar un miembro a la cola
+void eliminar_en_cola(Pila* pila);
 
 #endif

@@ -13,6 +13,7 @@ Implementacion de varios algoritmos en C y C++.
 ## Grafos 
 - Algoritmo de busqueda DFS Y BFS
 - Algoritmo de encontrar la ruta mas corta pontederada (Dijkstra)
+- Arbol B
 
 ## Metodos numericos
 - Encontrar el determinante de una matriz nxn

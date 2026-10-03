@@ -93,7 +93,8 @@ int insertarValorAArbol(int valor, Nodo* nodo){
     int r = insertarValorAArbol(valor, nodo->Pi[i]); 
 //Dependiendo si en su hijo hubo un cambio entonces el padre lo recibira y respondera con diferente de 0 si hubo un split, ahora en su nodo
     if(r) {
-    	nodo ->Pi[nodo->k + 1] = bufer_alto; 
+    	nodo ->Pi[nodo->k + 1] = bufer_alto;
+    	int p = 0;
     	return insertarValorNodo(nodo, r);
     }
     return 0;
@@ -141,9 +142,13 @@ void borrarArbol(ArbolB_plus* arbolB_plus){
 
 int insertarValorNodo(Nodo *nodo, int valor){
 	int i = nodo->k;
+	Nodo *temp;
 	for(; i>0 && (nodo->Ki[i - 1]>valor); i--){
 		nodo->Ki[i] = nodo->Ki[i - 1];
+		// Realizamos un switch
+		temp = nodo->Pi[i + 1]; 
 		nodo->Pi[i + 1] = nodo->Pi[i]; // Por eso contemplo un espacio mas de Pi para estructurar despues
+		nodo->Pi[i] = temp;
 	}
 	nodo->Ki[i] = valor;
 	nodo->k++;
@@ -156,6 +161,7 @@ int insertarValorNodo(Nodo *nodo, int valor){
 		// Pasamos los hijos al nuevo nodo y borramos la info pasada del actual despues de la mitad
 		int j = (nodo->k >> 1) + 1;
 		for(; j<nodo->orden;j++ , kw++){
+			//printf("T:%d ", nodo->Ki[j]);
 			nuevo_nodo -> Pi[kw] = nodo->Pi[j];
 			nuevo_nodo -> Ki[kw] = nodo->Ki[j];
 			nuevo_nodo -> k++;
@@ -171,8 +177,12 @@ int insertarValorNodo(Nodo *nodo, int valor){
 		// Si me regresa un  numero diferente de 0, en la funcion de la raiz entonces me crea un nodo
 		//  y me aguarda como hijos ambos bufers, pero si me regresa un numero en un nodo que no es raiz, 
 		//  entonces solo me guarda el mas grande
+		
+		//printf("N:%d ", nuevo_nodo);
+		
 		bufer_bajo = nodo;
 		bufer_alto = nuevo_nodo;
+		
 		return regreso;
 	}
 	return 0;
@@ -214,10 +224,14 @@ int main(){
 	/* Consideraciones, por lo pronto no compla el entero 0 debido a que lo valido como condicion*/ 
 	ArbolB_plus *arbolB_plus_1 = creacionArbol(4);
 	
-	for(int i = 1; i<=13; i++)
-		insertarEnArbol(i, arbolB_plus_1);	
+	int x;
+	scanf("%d", &x);
+	while(x>0){
+		insertarEnArbol(x, arbolB_plus_1);
+		imprimirArbol(arbolB_plus_1);
+		scanf("%d", &x);	
+	}
 			
-	imprimirArbol(arbolB_plus_1);
 	
 	borrarArbol(arbolB_plus_1);
 	 	
